@@ -62,6 +62,7 @@
   justify-content: center;
   flex-wrap: wrap;
   gap: 1rem;
+  margin-bottom: 2rem;
 }
 
 .loader {
@@ -186,6 +187,6 @@
   background-color: #000084;
   top: 0;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh + 4rem);
   overflow: auto;
 }
