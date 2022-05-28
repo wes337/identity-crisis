@@ -2,9 +2,10 @@ import { useState, useMemo, useEffect, useCallback } from "react";
 import IdentitySelector from "./IdentitySelector";
 import Generators from "./Generators";
 import { identities } from "./constants";
-import { getDatingProfile, getManifesto } from "./openAI";
+import { getDatingProfile, getFreestyle, getManifesto } from "./openAI";
 import "./App.css";
 import Question from "./Question";
+import Opinion from "./Opinion";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -15,7 +16,7 @@ function App() {
     "dating-profile": "",
     manifesto: "",
     question: "",
-    comment: "",
+    opinion: "",
     freestyle: "",
   });
 
@@ -32,7 +33,7 @@ function App() {
       "dating-profile": "",
       manifesto: "",
       question: "",
-      comment: "",
+      opinion: "",
       freestyle: "",
     });
   };
@@ -63,6 +64,19 @@ function App() {
     });
   }, [identity]);
 
+  const fetchFreestyle = useCallback(() => {
+    setLoading(true);
+    getFreestyle(identity).then((freestyle) => {
+      setContent((content) => {
+        return {
+          ...content,
+          freestyle,
+        };
+      });
+      setLoading(false);
+    });
+  }, [identity]);
+
   const refresh = () => {
     if (loading || !selectedGenerator) {
       return;
@@ -74,6 +88,10 @@ function App() {
 
     if (selectedGenerator?.id === "manifesto") {
       fetchManifesto();
+    }
+
+    if (selectedGenerator?.id === "freestyle") {
+      fetchFreestyle();
     }
   };
 
@@ -101,9 +119,17 @@ function App() {
       }
       fetchManifesto();
     }
+
+    if (selectedGenerator.id === "freestyle") {
+      if (content["freestyle"]) {
+        return;
+      }
+      fetchFreestyle();
+    }
   }, [
     content,
     fetchDatingProfile,
+    fetchFreestyle,
     fetchManifesto,
     identity,
     selectedGenerator,
@@ -134,6 +160,14 @@ function App() {
             setLoading={setLoading}
           />
         )}
+        {selectedGenerator?.id === "opinion" && (
+          <Opinion
+            identity={identity}
+            setContent={setContent}
+            loading={loading}
+            setLoading={setLoading}
+          />
+        )}
       </div>
     );
   };
@@ -156,7 +190,7 @@ function App() {
       {selectedGenerator && (
         <div className="generated-content-header">
           <h2>{selectedGenerator.label}</h2>
-          {!["question", "comment"].includes(selectedGenerator.id) && (
+          {!["question", "opinion"].includes(selectedGenerator.id) && (
             <button type="button" onClick={refresh} disabled={loading}>
               Refresh
             </button>

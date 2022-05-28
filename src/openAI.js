@@ -1,4 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
+import axios from "axios";
 
 const configuration = new Configuration({
   apiKey: process.env.REACT_APP_OPENAI_API_KEY,
@@ -16,7 +17,6 @@ export const getDatingProfile = async (identity = "") => {
     top_p: 1.0,
     frequency_penalty: 0.0,
     presence_penalty: 0.0,
-    best_of: 3,
   });
 
   return response.data.choices[0].text;
@@ -32,7 +32,6 @@ export const getManifesto = async (identity = "") => {
     top_p: 1.0,
     frequency_penalty: 0.0,
     presence_penalty: 1.0,
-    best_of: 3,
     n: 3,
   });
 
@@ -46,10 +45,7 @@ export const getManifesto = async (identity = "") => {
 };
 
 export const answerQuestion = async (identity = "", question = "") => {
-  const prompt =
-    question.trim().length > 0
-      ? `${question}\n Write a ${identity}'s answer:`
-      : `Write how a ${identity} would make a sarcastic comment:`;
+  const prompt = `${question}\n Write a ${identity}'s answer:`;
 
   const response = await openAI.createCompletion("text-davinci-002", {
     prompt,
@@ -59,6 +55,66 @@ export const answerQuestion = async (identity = "", question = "") => {
     frequency_penalty: 0.0,
     presence_penalty: 0.0,
     best_of: 3,
+  });
+
+  return response.data.choices[0].text;
+};
+
+export const getFreestyle = async (identity = "") => {
+  const prompts = [
+    `A poem written by a ${identity}:`,
+    `A gangster rap written by a ${identity}:`,
+    `A ${identity} describing a fun night:`,
+    `Financial advice from a ${identity}:`,
+    `Life advice from a ${identity}`,
+    `A ${identity} describing the perfect day:`,
+  ];
+
+  const prompt = prompts[Math.floor(Math.random() * prompts.length)];
+
+  const response = await openAI.createCompletion("text-davinci-002", {
+    prompt,
+    temperature: 0.9,
+    max_tokens: 1024,
+    top_p: 1.0,
+    frequency_penalty: 0.0,
+    presence_penalty: 1.0,
+  });
+
+  return response.data.choices[0].text;
+};
+
+export const getScrapedWebsite = async (url = "") => {
+  const response = await axios.get(
+    `http://api.scraperapi.com?api_key=${process.env.REACT_APP_SCRAPER_API_KEY}&url=${url}`
+  );
+
+  const parser = new DOMParser();
+  const htmlDoc = parser.parseFromString(response.data, "text/html");
+
+  const main = htmlDoc.querySelector("main");
+
+  if (main) {
+    return main.textContent.slice(0, 4097);
+  }
+
+  const { textContent } = htmlDoc.body;
+
+  return textContent.slice(0, 4097);
+};
+
+export const getOpinion = async (identity = "", url = "") => {
+  const scrapedWebsite = await getScrapedWebsite(url);
+
+  const prompt = `${scrapedWebsite}\n Write a ${identity}'s opinion:`;
+
+  const response = await openAI.createCompletion("text-davinci-002", {
+    prompt,
+    temperature: 0.9,
+    max_tokens: 2048,
+    top_p: 1.0,
+    frequency_penalty: 0.0,
+    presence_penalty: 0.0,
   });
 
   return response.data.choices[0].text;

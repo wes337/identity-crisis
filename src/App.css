@@ -55,3 +55,8 @@
 .question-input {
   resize: none;
 }
+
+.opinion-input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
