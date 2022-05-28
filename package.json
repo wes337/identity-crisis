@@ -6,8 +6,6 @@
   "dependencies": {
     "386-animation": "^1.0.6",
     "axios": "^0.27.2",
-    "dotenv": "^16.0.1",
-    "openai": "^2.0.5",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
