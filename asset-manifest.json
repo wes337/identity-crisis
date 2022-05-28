@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/identity-crisis/static/css/main.4744bbe3.css",
-    "main.js": "/identity-crisis/static/js/main.dcb3003a.js",
+    "main.css": "/identity-crisis/static/css/main.63857ba9.css",
+    "main.js": "/identity-crisis/static/js/main.6da80ef6.js",
     "static/media/Fixedsys500c.svg": "/identity-crisis/static/media/Fixedsys500c.e595f39e4928a8429900.svg",
     "static/media/Fixedsys500c.eot": "/identity-crisis/static/media/Fixedsys500c.7a2849682ed25b9a381e.eot",
     "static/media/Fixedsys500c.ttf": "/identity-crisis/static/media/Fixedsys500c.b990d91d3ae80c07a05f.ttf",
     "static/media/Fixedsys500c.woff": "/identity-crisis/static/media/Fixedsys500c.b951dc2142833dd52ec4.woff",
     "index.html": "/identity-crisis/index.html",
-    "main.4744bbe3.css.map": "/identity-crisis/static/css/main.4744bbe3.css.map",
-    "main.dcb3003a.js.map": "/identity-crisis/static/js/main.dcb3003a.js.map"
+    "main.63857ba9.css.map": "/identity-crisis/static/css/main.63857ba9.css.map",
+    "main.6da80ef6.js.map": "/identity-crisis/static/js/main.6da80ef6.js.map"
   },
   "entrypoints": [
-    "static/css/main.4744bbe3.css",
-    "static/js/main.dcb3003a.js"
+    "static/css/main.63857ba9.css",
+    "static/js/main.6da80ef6.js"
   ]
 }
