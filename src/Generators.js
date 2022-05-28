@@ -6,9 +6,13 @@ function Generators({ selectedGenerator, setSelectedGenerator, identity }) {
     setSelectedGenerator(generator);
   };
 
+  if (!identity) {
+    return null;
+  }
+
   return (
     <div className="generators">
-      <h3>What do you need?</h3>
+      <h3 className="yellow-text uppercase">What do you need?</h3>
       <div className="generator-buttons">
         {generators.map(({ label, id }) => (
           <button

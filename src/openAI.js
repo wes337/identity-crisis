@@ -10,13 +10,14 @@ const openAI = new OpenAIApi(configuration);
 export const getDatingProfile = async (identity = "") => {
   const prompt = `Write a dating profile for a ${identity}:`;
 
-  const response = await openAI.createCompletion("text-davinci-002", {
+  const response = await openAI.createCompletion("text-curie-001", {
     prompt,
     temperature: 0.9,
     max_tokens: 512,
     top_p: 1.0,
     frequency_penalty: 0.0,
     presence_penalty: 0.0,
+    best_of: 3,
   });
 
   return response.data.choices[0].text;
@@ -25,14 +26,15 @@ export const getDatingProfile = async (identity = "") => {
 export const getManifesto = async (identity = "") => {
   const prompt = `Write a manifesto for a ${identity}:`;
 
-  const response = await openAI.createCompletion("text-davinci-002", {
+  const response = await openAI.createCompletion("text-curie-001", {
     prompt,
     temperature: 0.9,
-    max_tokens: 2048,
+    max_tokens: 2048 - prompt.length,
     top_p: 1.0,
     frequency_penalty: 0.0,
-    presence_penalty: 1.0,
+    presence_penalty: 0.5,
     n: 3,
+    best_of: 5,
   });
 
   let manifesto = "";
@@ -47,7 +49,7 @@ export const getManifesto = async (identity = "") => {
 export const answerQuestion = async (identity = "", question = "") => {
   const prompt = `${question}\n Write a ${identity}'s answer:`;
 
-  const response = await openAI.createCompletion("text-davinci-002", {
+  const response = await openAI.createCompletion("text-curie-001", {
     prompt,
     temperature: 0.9,
     max_tokens: 1024,
@@ -72,13 +74,13 @@ export const getFreestyle = async (identity = "") => {
 
   const prompt = prompts[Math.floor(Math.random() * prompts.length)];
 
-  const response = await openAI.createCompletion("text-davinci-002", {
+  const response = await openAI.createCompletion("text-curie-001", {
     prompt,
     temperature: 0.9,
     max_tokens: 1024,
     top_p: 1.0,
     frequency_penalty: 0.0,
-    presence_penalty: 1.0,
+    presence_penalty: 0.0,
   });
 
   return response.data.choices[0].text;
@@ -100,7 +102,7 @@ export const getScrapedWebsite = async (url = "") => {
 
   const { textContent } = htmlDoc.body;
 
-  return textContent.slice(0, 4097);
+  return textContent.slice(0, 2000);
 };
 
 export const getOpinion = async (identity = "", url = "") => {
@@ -108,10 +110,10 @@ export const getOpinion = async (identity = "", url = "") => {
 
   const prompt = `${scrapedWebsite}\n Write a ${identity}'s opinion:`;
 
-  const response = await openAI.createCompletion("text-davinci-002", {
+  const response = await openAI.createCompletion("text-curie-001", {
     prompt,
     temperature: 0.9,
-    max_tokens: 2048,
+    max_tokens: 1024,
     top_p: 1.0,
     frequency_penalty: 0.0,
     presence_penalty: 0.0,

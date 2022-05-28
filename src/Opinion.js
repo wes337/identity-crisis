@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { getOpinion } from "./openAI";
+import { isValidUrl } from "./utils";
 
 function Opinion({ identity, setContent, loading, setLoading }) {
   const [url, setUrl] = useState("");
+  const [validUrl, setValidUrl] = useState(false);
 
   const fetchOpinion = (event) => {
     event.preventDefault();
@@ -33,12 +35,17 @@ function Opinion({ identity, setContent, loading, setLoading }) {
           <input
             className="opinion-input"
             type="text"
-            onChange={(event) => setUrl(event.target.value)}
+            placeholder="Enter a URL.."
+            onChange={(event) => {
+              setUrl(event.target.value);
+              console.log(isValidUrl(event.target.value));
+              setValidUrl(isValidUrl(event.target.value));
+            }}
           />
           <input
             type="submit"
             value="What do I think about this?"
-            disabled={loading || url.trim().length <= 0}
+            disabled={loading || url.trim().length <= 0 || !validUrl}
           />
         </div>
       </form>

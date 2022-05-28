@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "386-animation": "^1.0.6",
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
-    "lodash.debounce": "^4.0.8",
     "openai": "^2.0.5",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "sass": "^1.52.1"
   },
   "scripts": {
     "start": "react-scripts start",

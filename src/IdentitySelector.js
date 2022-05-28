@@ -1,60 +1,86 @@
-import { useCallback } from "react";
-import debounce from "lodash.debounce";
+import { useState } from "react";
 import { identities } from "./constants";
+import "./IdentitySelector.scss";
 
 function IdentitySelector({
   selectedIdentity,
   setSelectedIdentity,
   setCustomIdentity,
 }) {
+  const [identityChosen, setIdentityChosen] = useState(false);
+  const [identity, setIdentity] = useState(-1);
+  const [customIdentityTemp, setCustomIdentityTemp] = useState("");
+
   const changeCustomIdentity = (event) => {
-    setCustomIdentity(event.target.value);
+    setCustomIdentityTemp(event.target.value);
   };
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const debouncedChangeCustomIdentity = useCallback(
-    debounce(changeCustomIdentity, 1000),
-    []
-  );
+  const updateIdentity = () => {
+    setSelectedIdentity(identity);
+
+    if (identity === "custom") {
+      setCustomIdentity(customIdentityTemp);
+    }
+
+    setIdentityChosen(true);
+  };
+
+  if (identityChosen) {
+    return (
+      <div className="identity-chosen">
+        <div className="muted-text">You chose...</div>
+        {identities[identity]}
+      </div>
+    );
+  }
 
   return (
     <div className="identity-selector">
-      <fieldset>
-        <legend>Select your identity:</legend>
-        {identities.map((identity, index) => (
-          <div key={identity}>
-            <input
-              type="radio"
-              id={identity}
-              name={identity}
-              value={identity}
-              checked={selectedIdentity === index}
-              onChange={() => setSelectedIdentity(index)}
-            />
-            <label htmlFor={identity}>{identity}</label>
-          </div>
+      <div className="identity-list">
+        {identities.map((ident, index) => (
+          <button
+            key={ident}
+            onClick={() => setIdentity(index)}
+            className={identity === index ? "selected-identity" : ""}
+          >
+            {ident}
+          </button>
         ))}
-        <div>
-          <input
-            type="radio"
-            id="custom"
-            name="custom"
-            value="custom"
-            checked={selectedIdentity === "custom"}
-            onChange={() => setSelectedIdentity("custom")}
-          />
-          <label htmlFor="custom">
+        <button
+          className={identity === "custom" ? "selected-identity" : ""}
+          onClick={() => setIdentity("custom")}
+        >
+          Custom
+        </button>
+        {identity === "custom" && (
+          <>
+            <div className="custom-identity-warning">
+              <div className="custom-identity-warning-header">Danger!</div>
+              <div>
+                You chose a custom identity. You are in danger of thinking for
+                yourself! Results may vary.
+              </div>
+            </div>
             <input
-              disabled={selectedIdentity !== "custom"}
+              className="custom-identity-input"
               type="text"
-              id="custom-identity"
-              name="custom-identity"
               minLength="4"
-              onChange={debouncedChangeCustomIdentity}
+              onChange={changeCustomIdentity}
+              placeholder="Type in your custom identity..."
             />
-          </label>
-        </div>
-      </fieldset>
+          </>
+        )}
+      </div>
+      <button
+        className="set-identity"
+        onClick={updateIdentity}
+        disabled={
+          identity < 0 ||
+          (identity === "custom" && customIdentityTemp.trim().length === 0)
+        }
+      >
+        Set Identity
+      </button>
     </div>
   );
 }

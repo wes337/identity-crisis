@@ -1,0 +1,190 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.header {
+  padding: 1rem;
+  text-align: center;
+
+  h1 {
+    font-size: 48px;
+    font-weight: bold;
+  }
+
+  p {
+    text-align: center;
+    padding: 9px 14px;
+    margin: 9px 4px;
+    font-size: 20px;
+    line-height: 1.25;
+    color: #ffffff;
+    border: 2px solid #bbbbbb;
+
+    span {
+      color: #fe54fe;
+    }
+
+    em {
+      color: #bbbbbb;
+    }
+  }
+}
+
+.header-desktop,
+.header-mobile {
+  background-color: black;
+  color: #fefe54;
+  float: left;
+}
+
+.header-desktop {
+  display: none;
+}
+
+.header-mobile {
+  display: block;
+}
+
+@media only screen and (min-width: 1200px) {
+  .header-desktop {
+    display: block;
+  }
+  .header-mobile {
+    display: none;
+  }
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.loader {
+  margin: 1rem;
+  color: #fefe54;
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.generators {
+  text-align: center;
+}
+
+.generator-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.generated-content {
+  margin: 1rem;
+  padding: 10px 15px;
+  background-color: #bbbbbb;
+  border: 2px solid #000000;
+  box-shadow: 0 0 0 5px, 11px 13px 0 4px #000000;
+
+  p {
+    color: #000000;
+    font-size: 20px;
+    margin: 1rem 0;
+  }
+}
+
+.generated-content-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  background-color: #00aaaa;
+  margin: 1rem 0.75rem;
+  padding: 1rem;
+}
+
+.generated-content-header h2 {
+  margin: 0;
+  text-transform: uppercase;
+  color: #000000;
+  font-size: 20px;
+}
+
+.generated-content-text {
+  font-size: 20px;
+  margin: 1rem;
+  color: #000000;
+}
+
+.question {
+  padding: 1rem;
+  text-align: center;
+
+  label {
+    font-size: 20px;
+    color: #000000;
+  }
+}
+
+.question-input-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  input[type="submit"] {
+    background-color: #555555;
+  }
+}
+
+.question-input {
+  resize: none;
+}
+
+.opinion {
+  label {
+    font-size: 20px;
+    color: #000000;
+  }
+}
+
+.opinion-input-wrapper {
+  display: flex;
+  flex-direction: column;
+
+  input[type="text"] {
+    margin-top: 1rem;
+    font-size: 20px;
+  }
+
+  input[type="submit"] {
+    background-color: #00aaaa;
+    margin-bottom: 1rem;
+  }
+}
+
+.purple-text {
+  color: #fe54fe;
+}
+
+.yellow-text {
+  color: #fefe54;
+}
+
+.muted-text {
+  color: #bbbbbb;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.content-wrapper {
+  position: absolute;
+  background-color: #000084;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
+}

@@ -1,15 +1,18 @@
 import { useState, useMemo, useEffect, useCallback } from "react";
+import init386 from "386-animation";
 import IdentitySelector from "./IdentitySelector";
 import Generators from "./Generators";
 import { identities } from "./constants";
 import { getDatingProfile, getFreestyle, getManifesto } from "./openAI";
-import "./App.css";
+import Header from "./Header";
 import Question from "./Question";
 import Opinion from "./Opinion";
+import "386-animation/386.css";
+import "./App.scss";
 
 function App() {
   const [loading, setLoading] = useState(false);
-  const [selectedIdentity, setSelectedIdentity] = useState(0);
+  const [selectedIdentity, setSelectedIdentity] = useState(-1);
   const [selectedGenerator, setSelectedGenerator] = useState(undefined);
   const [customIdentity, setCustomIdentity] = useState("");
   const [content, setContent] = useState({
@@ -96,6 +99,10 @@ function App() {
   };
 
   useEffect(() => {
+    init386(); // https://github.com/wes337/386-animation
+  }, []);
+
+  useEffect(() => {
     if (identity) {
       clearContent();
     }
@@ -140,14 +147,10 @@ function App() {
   };
 
   const renderContent = () => {
-    if (!identity || !selectedGenerator) {
-      return null;
-    }
-
     return (
       <div className="generated-content">
         {loading && renderLoader()}
-        {!loading && content && (
+        {!loading && content && content[selectedGenerator.id] && (
           <p className="generated-content-text">
             {content[selectedGenerator.id]}
           </p>
@@ -174,7 +177,7 @@ function App() {
 
   return (
     <div className="app">
-      <h1>Identity Crisis</h1>
+      <Header />
       <div className="controls">
         <IdentitySelector
           selectedIdentity={selectedIdentity}
@@ -187,17 +190,27 @@ function App() {
           identity={identity}
         />
       </div>
-      {selectedGenerator && (
-        <div className="generated-content-header">
-          <h2>{selectedGenerator.label}</h2>
-          {!["question", "opinion"].includes(selectedGenerator.id) && (
-            <button type="button" onClick={refresh} disabled={loading}>
-              Refresh
-            </button>
-          )}
+      {identity && selectedGenerator && (
+        <div className="content-wrapper">
+          <div className="generated-content-header">
+            <h2>{selectedGenerator.label}</h2>
+            <div className="generated-content-header-buttons">
+              {!["question", "opinion"].includes(selectedGenerator.id) && (
+                <button type="button" onClick={refresh} disabled={loading}>
+                  Refresh
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => setSelectedGenerator(undefined)}
+              >
+                Back
+              </button>
+            </div>
+          </div>
+          {renderContent()}
         </div>
       )}
-      {renderContent()}
     </div>
   );
 }
