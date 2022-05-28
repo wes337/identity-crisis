@@ -1,0 +1,57 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.loader {
+  margin: 1rem;
+}
+
+.generators {
+  text-align: center;
+}
+
+.generated-content {
+  margin: 1rem;
+  padding: 1rem;
+  background-color: antiquewhite;
+}
+
+.generated-content-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.generated-content-header h2 {
+  margin: 0;
+}
+
+.generated-content-text {
+  margin: 1rem;
+}
+
+.question {
+  padding: 1rem;
+  background-color: aquamarine;
+}
+
+.question-input-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.question-input {
+  resize: none;
+}
