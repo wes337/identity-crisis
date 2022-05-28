@@ -99,7 +99,9 @@ function App() {
   };
 
   useEffect(() => {
-    init386(); // https://github.com/wes337/386-animation
+    init386({
+      speedFactor: 1,
+    }); // https://github.com/wes337/386-animation
   }, []);
 
   useEffect(() => {
