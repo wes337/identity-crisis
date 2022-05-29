@@ -127,14 +127,18 @@
   text-align: center;
 
   label {
-    font-size: 20px;
-    color: #000000;
+    font-size: 18px;
+    color: purple;
   }
 }
 
 .question-input-wrapper {
   display: flex;
   flex-direction: column;
+
+  input[type="text"] {
+    font-size: 20px;
+  }
 
   input[type="submit"] {
     background-color: #555555;
@@ -147,8 +151,8 @@
 
 .opinion {
   label {
-    font-size: 20px;
-    color: #000000;
+    font-size: 18px;
+    color: purple;
   }
 }
 

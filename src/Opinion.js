@@ -35,7 +35,7 @@ function Opinion({ identity, setContent, loading, setLoading }) {
           <input
             className="opinion-input"
             type="text"
-            placeholder="Enter a URL.."
+            placeholder="Enter a URL..."
             onChange={(event) => {
               setUrl(event.target.value);
               console.log(isValidUrl(event.target.value));

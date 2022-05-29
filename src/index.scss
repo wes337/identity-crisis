@@ -46,6 +46,7 @@ input[type="submit"] {
   -webkit-box-shadow: 10px 10px 0 #000000;
   -moz-box-shadow: 10px 10px 0 #000000;
   box-shadow: 10px 10px 0 #000000;
+  white-space: normal;
 
   &:before {
     content: "< ";
@@ -111,4 +112,5 @@ textarea {
   border: 0;
   border: 2px solid #000000;
   margin-bottom: 1rem;
+  font-size: 20px;
 }
