@@ -100,7 +100,7 @@ function App() {
 
   useEffect(() => {
     init386({
-      speedFactor: 1,
+      speedFactor: 2.5,
     }); // https://github.com/wes337/386-animation
   }, []);
 

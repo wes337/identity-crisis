@@ -26,10 +26,13 @@ function IdentitySelector({
   };
 
   if (identityChosen) {
+    const identityName =
+      identity === "custom" ? customIdentityTemp : identities[identity];
+
     return (
       <div className="identity-chosen">
         <div className="muted-text">You chose...</div>
-        {identities[identity]}
+        {identityName}
       </div>
     );
   }
