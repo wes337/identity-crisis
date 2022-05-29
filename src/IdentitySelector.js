@@ -24,6 +24,8 @@ function IdentitySelector({
     if (string.toLowerCase().startsWith("the ")) {
       return string.slice(4);
     }
+
+    return string;
   };
 
   const changeCustomIdentity = (event) => {
