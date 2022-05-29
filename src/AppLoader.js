@@ -3,7 +3,6 @@ import init386 from "386-animation";
 import "386-animation/386.css";
 import App from "./App";
 import { pingServer } from "./openAI";
-import "./AppLoader.scss";
 
 function AppLoader() {
   const [ready, setReady] = useState(false);
@@ -17,10 +16,6 @@ function AppLoader() {
       setReady(serverOnline);
     });
   }, []);
-
-  if (!ready) {
-    return <div className="starting-server">Starting server...</div>;
-  }
 
   return <App />;
 }
