@@ -179,18 +179,24 @@ function App() {
 
   return (
     <div className="app">
-      <Header />
-      <div className="controls">
-        <IdentitySelector
-          selectedIdentity={selectedIdentity}
-          setSelectedIdentity={setSelectedIdentity}
-          setCustomIdentity={setCustomIdentity}
-        />
-        <Generators
-          selectedGenerator={selectedGenerator}
-          setSelectedGenerator={setSelectedGenerator}
-          identity={identity}
-        />
+      <div
+        className={`controls-wrapper ${
+          !identity || !selectedGenerator ? "show" : "hide"
+        }`}
+      >
+        <Header />
+        <div className="controls">
+          <IdentitySelector
+            selectedIdentity={selectedIdentity}
+            setSelectedIdentity={setSelectedIdentity}
+            setCustomIdentity={setCustomIdentity}
+          />
+          <Generators
+            selectedGenerator={selectedGenerator}
+            setSelectedGenerator={setSelectedGenerator}
+            identity={identity}
+          />
+        </div>
       </div>
       {identity && selectedGenerator && (
         <div className="content-wrapper">

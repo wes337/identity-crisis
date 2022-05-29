@@ -43,3 +43,9 @@ export const getOpinion = async (identity = "", url = "") => {
     })
     .then((response) => response.data);
 };
+
+export const pingServer = async () => {
+  return axios
+    .get(`${baseApiUrl}/ping`)
+    .then((response) => response.status === 204);
+};

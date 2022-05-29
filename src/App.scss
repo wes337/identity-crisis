@@ -240,3 +240,11 @@
     padding: 0 1rem;
   }
 }
+
+.controls-wrapper {
+  display: none;
+
+  &.show {
+    display: block;
+  }
+}
