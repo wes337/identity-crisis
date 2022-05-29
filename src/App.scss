@@ -85,6 +85,7 @@
 
 .generated-content {
   margin: 1rem;
+  margin-bottom: 2rem;
   padding: 10px 15px;
   background-color: #bbbbbb;
   border: 2px solid #000000;
@@ -176,6 +177,18 @@
 
 .muted-text {
   color: #bbbbbb;
+}
+
+.small-text {
+  font-size: 18px;
+}
+
+.big-text {
+  font-size: 24px;
+}
+
+.italic-text {
+  font-style: italic;
 }
 
 .uppercase {

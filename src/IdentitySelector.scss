@@ -10,6 +10,10 @@
   background-color: #00aaaa;
 }
 
+.change-identity-button {
+  margin: 1rem 0;
+}
+
 .identity-list {
   padding: 10px 15px;
   background-color: #bbbbbb;
@@ -41,6 +45,10 @@
     &:focus {
       background-color: #000000;
       color: #bbbbbb;
+    }
+
+    &:active {
+      transform: none;
     }
   }
 

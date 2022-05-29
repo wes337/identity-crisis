@@ -25,14 +25,28 @@ function IdentitySelector({
     setIdentityChosen(true);
   };
 
+  const resetIdentity = () => {
+    setIdentity(-1);
+    setSelectedIdentity(-1);
+    setCustomIdentityTemp("");
+    setCustomIdentity("");
+    setIdentityChosen(false);
+  };
+
   if (identityChosen) {
     const identityName =
       identity === "custom" ? customIdentityTemp : identities[identity];
 
     return (
       <div className="identity-chosen">
-        <div className="muted-text">You chose...</div>
-        {identityName}
+        <div className="small-text italic-text">You chose...</div>
+        <div className="big-text">{identityName}</div>
+        <button
+          className="change-identity-button"
+          onClick={() => resetIdentity()}
+        >
+          Change identity
+        </button>
       </div>
     );
   }
