@@ -11,6 +11,21 @@ function IdentitySelector({
   const [identity, setIdentity] = useState(-1);
   const [customIdentityTemp, setCustomIdentityTemp] = useState("");
 
+  const removePrefix = (string) => {
+    // Remove 'a ', 'an ', and 'the '
+    if (string.toLowerCase().startsWith("a ")) {
+      return string.slice(2);
+    }
+
+    if (string.toLowerCase().startsWith("an ")) {
+      return string.slice(3);
+    }
+
+    if (string.toLowerCase().startsWith("the ")) {
+      return string.slice(4);
+    }
+  };
+
   const changeCustomIdentity = (event) => {
     setCustomIdentityTemp(event.target.value);
   };
@@ -19,7 +34,7 @@ function IdentitySelector({
     setSelectedIdentity(identity);
 
     if (identity === "custom") {
-      setCustomIdentity(customIdentityTemp);
+      setCustomIdentity(removePrefix(customIdentityTemp));
     }
 
     setIdentityChosen(true);
