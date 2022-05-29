@@ -195,6 +195,7 @@ function App() {
       {identity && selectedGenerator && (
         <div className="content-wrapper">
           <div className="generated-content-header">
+            <h1>{identity}</h1>
             <h2>{selectedGenerator.label}</h2>
             <div className="generated-content-header-buttons">
               {!["question", "opinion"].includes(selectedGenerator.id) && (

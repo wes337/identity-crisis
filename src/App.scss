@@ -75,6 +75,19 @@
 
 .generators {
   text-align: center;
+
+  h3 {
+    margin-bottom: 0.5rem;
+
+    &:before {
+      content: ">> ";
+      color: #fff;
+    }
+    &:after {
+      content: " <<";
+      color: #fff;
+    }
+  }
 }
 
 .generator-buttons {
@@ -104,9 +117,23 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  background-color: #00aaaa;
-  margin: 1rem 0.75rem;
+  text-align: center;
   padding: 1rem;
+  margin: 1rem 0.75rem;
+  font-size: 20px;
+  line-height: 20px;
+  color: #ffffff;
+  background-color: #00aaaa;
+  border: 4px double #ffffff;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  box-shadow: 0 0 0 4px #00aaaa;
+}
+
+.generated-content-header h1 {
+  font-size: 24px;
+  font-weight: 300;
 }
 
 .generated-content-header h2 {
@@ -206,4 +233,10 @@
   width: 100vw;
   min-height: 100vh;
   overflow: auto;
+}
+
+@media only screen and (min-width: 1000px) {
+  .content-wrapper {
+    padding: 0 1rem;
+  }
 }
