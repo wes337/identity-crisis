@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/identity-crisis/static/css/main.1c655e6e.css",
-    "main.js": "/identity-crisis/static/js/main.aa28cf5d.js",
+    "main.css": "/identity-crisis/static/css/main.81579f47.css",
+    "main.js": "/identity-crisis/static/js/main.a856082f.js",
     "static/media/Fixedsys500c.svg": "/identity-crisis/static/media/Fixedsys500c.e595f39e4928a8429900.svg",
     "static/media/Fixedsys500c.eot": "/identity-crisis/static/media/Fixedsys500c.7a2849682ed25b9a381e.eot",
     "static/media/Fixedsys500c.ttf": "/identity-crisis/static/media/Fixedsys500c.b990d91d3ae80c07a05f.ttf",
     "static/media/Fixedsys500c.woff": "/identity-crisis/static/media/Fixedsys500c.b951dc2142833dd52ec4.woff",
     "index.html": "/identity-crisis/index.html",
-    "main.1c655e6e.css.map": "/identity-crisis/static/css/main.1c655e6e.css.map",
-    "main.aa28cf5d.js.map": "/identity-crisis/static/js/main.aa28cf5d.js.map"
+    "main.81579f47.css.map": "/identity-crisis/static/css/main.81579f47.css.map",
+    "main.a856082f.js.map": "/identity-crisis/static/js/main.a856082f.js.map"
   },
   "entrypoints": [
-    "static/css/main.1c655e6e.css",
-    "static/js/main.aa28cf5d.js"
+    "static/css/main.81579f47.css",
+    "static/js/main.a856082f.js"
   ]
 }
