@@ -38,7 +38,6 @@ function Opinion({ identity, setContent, loading, setLoading }) {
             placeholder="Enter a URL..."
             onChange={(event) => {
               setUrl(event.target.value);
-              console.log(isValidUrl(event.target.value));
               setValidUrl(isValidUrl(event.target.value));
             }}
           />

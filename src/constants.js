@@ -1,8 +1,8 @@
 export const identities = [
-  "Fascist",
-  "Person of color",
+  "Sports fanatic",
+  "Evil wizard",
   "Dark web aficionado",
-  "Hillary Clinton supporter",
+  "Insane genius",
 ];
 
 export const generators = [
