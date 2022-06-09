@@ -10,3 +10,20 @@ export const isValidUrl = (urlString = "") => {
   ); // fragment locator
   return !!pattern.test(urlString);
 };
+
+export const removeStringPrefix = (string = "") => {
+  // Remove 'a ', 'an ', and 'the '
+  if (string.toLowerCase().startsWith("a ")) {
+    return string.slice(2);
+  }
+
+  if (string.toLowerCase().startsWith("an ")) {
+    return string.slice(3);
+  }
+
+  if (string.toLowerCase().startsWith("the ")) {
+    return string.slice(4);
+  }
+
+  return string;
+};

@@ -1,136 +1,89 @@
-import { useState, useMemo, useEffect, useCallback } from "react";
-import init386 from "386-animation";
-import IdentitySelector from "./IdentitySelector";
-import Generators from "./Generators";
-import { identities } from "./constants";
-import { getDatingProfile, getFreestyle, getManifesto } from "./openAI";
-import Header from "./Header";
-import Question from "./Question";
-import Opinion from "./Opinion";
-import "386-animation/386.css";
-import "./App.scss";
+import { useEffect, useCallback } from "react";
+import styled from "styled-components";
+import { getDatingProfile, getFreestyle, getManifesto } from "./api";
+import Header from "./components/Header";
+import Content from "./components/Content";
+import useLoading from "./hooks/useLoading";
+import useContent from "./hooks/useContent";
+import useIdentity from "./hooks/useIdentity";
+import styles from "./constants/styles";
+import useNavigation from "./hooks/useNavigation";
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  const [selectedIdentity, setSelectedIdentity] = useState(-1);
-  const [selectedGenerator, setSelectedGenerator] = useState(undefined);
-  const [customIdentity, setCustomIdentity] = useState("");
-  const [content, setContent] = useState({
-    "dating-profile": "",
-    manifesto: "",
-    question: "",
-    opinion: "",
-    freestyle: "",
-  });
-
-  const identity = useMemo(() => {
-    if (selectedIdentity === "custom" && customIdentity) {
-      return customIdentity;
-    }
-
-    return identities[selectedIdentity];
-  }, [customIdentity, selectedIdentity]);
-
-  const clearContent = () => {
-    setContent({
-      "dating-profile": "",
-      manifesto: "",
-      question: "",
-      opinion: "",
-      freestyle: "",
-    });
-  };
+  const { loading, setLoading } = useLoading();
+  const { identity } = useIdentity();
+  const { activeSection } = useNavigation();
+  const { content, clearContent, setContent } = useContent();
 
   const fetchDatingProfile = useCallback(() => {
     setLoading(true);
     getDatingProfile(identity).then((datingProfile) => {
-      setContent((content) => {
-        return {
-          ...content,
-          "dating-profile": datingProfile,
-        };
-      });
+      setContent("datingProfile", datingProfile);
       setLoading(false);
     });
-  }, [identity]);
+  }, [identity, setContent, setLoading]);
 
   const fetchManifesto = useCallback(() => {
     setLoading(true);
     getManifesto(identity).then((manifesto) => {
-      setContent((content) => {
-        return {
-          ...content,
-          manifesto,
-        };
-      });
+      setContent("manifesto", manifesto);
       setLoading(false);
     });
-  }, [identity]);
+  }, [identity, setContent, setLoading]);
 
   const fetchFreestyle = useCallback(() => {
     setLoading(true);
     getFreestyle(identity).then((freestyle) => {
-      setContent((content) => {
-        return {
-          ...content,
-          freestyle,
-        };
-      });
+      setContent("freestyle", freestyle);
       setLoading(false);
     });
-  }, [identity]);
+  }, [identity, setContent, setLoading]);
 
   const refresh = () => {
-    if (loading || !selectedGenerator) {
+    if (loading || !activeSection) {
       return;
     }
 
-    if (selectedGenerator?.id === "dating-profile") {
+    if (activeSection === "datingProfile") {
       fetchDatingProfile();
     }
 
-    if (selectedGenerator?.id === "manifesto") {
+    if (activeSection === "manifesto") {
       fetchManifesto();
     }
 
-    if (selectedGenerator?.id === "freestyle") {
+    if (activeSection === "freestyle") {
       fetchFreestyle();
     }
   };
 
   useEffect(() => {
-    init386({
-      speedFactor: 2.5,
-    }); // https://github.com/wes337/386-animation
-  }, []);
-
-  useEffect(() => {
     if (identity) {
       clearContent();
     }
-  }, [identity]);
+  }, [clearContent, identity]);
 
   useEffect(() => {
-    if (!identity || !selectedGenerator) {
+    if (!identity || !activeSection) {
       return;
     }
 
-    if (selectedGenerator.id === "dating-profile") {
-      if (content["dating-profile"]) {
+    if (activeSection === "datingProfile") {
+      if (content.datingProfile) {
         return;
       }
       fetchDatingProfile();
     }
 
-    if (selectedGenerator.id === "manifesto") {
-      if (content["manifesto"]) {
+    if (activeSection === "manifesto") {
+      if (content.manifesto) {
         return;
       }
       fetchManifesto();
     }
 
-    if (selectedGenerator.id === "freestyle") {
-      if (content["freestyle"]) {
+    if (activeSection === "freestyle") {
+      if (content.freestyle) {
         return;
       }
       fetchFreestyle();
@@ -141,87 +94,26 @@ function App() {
     fetchFreestyle,
     fetchManifesto,
     identity,
-    selectedGenerator,
+    activeSection,
   ]);
 
-  const renderLoader = () => {
-    return <h4 className="loader">Thinking for you, please wait...</h4>;
-  };
-
-  const renderContent = () => {
-    return (
-      <div className="generated-content">
-        {loading && renderLoader()}
-        {!loading && content && content[selectedGenerator.id] && (
-          <p className="generated-content-text">
-            {content[selectedGenerator.id]}
-          </p>
-        )}
-        {selectedGenerator?.id === "question" && (
-          <Question
-            identity={identity}
-            setContent={setContent}
-            loading={loading}
-            setLoading={setLoading}
-          />
-        )}
-        {selectedGenerator?.id === "opinion" && (
-          <Opinion
-            identity={identity}
-            setContent={setContent}
-            loading={loading}
-            setLoading={setLoading}
-          />
-        )}
-      </div>
-    );
-  };
-
   return (
-    <div className="app">
-      <div
-        className={`controls-wrapper ${
-          !identity || !selectedGenerator ? "show" : "hide"
-        }`}
-      >
-        <Header />
-        <div className="controls">
-          <IdentitySelector
-            selectedIdentity={selectedIdentity}
-            setSelectedIdentity={setSelectedIdentity}
-            setCustomIdentity={setCustomIdentity}
-          />
-          <Generators
-            selectedGenerator={selectedGenerator}
-            setSelectedGenerator={setSelectedGenerator}
-            identity={identity}
-          />
-        </div>
-      </div>
-      {identity && selectedGenerator && (
-        <div className="content-wrapper">
-          <div className="generated-content-header">
-            <h1>{identity}</h1>
-            <h2>{selectedGenerator.label}</h2>
-            <div className="generated-content-header-buttons">
-              {!["question", "opinion"].includes(selectedGenerator.id) && (
-                <button type="button" onClick={refresh} disabled={loading}>
-                  Refresh
-                </button>
-              )}
-              <button
-                type="button"
-                onClick={() => setSelectedGenerator(undefined)}
-              >
-                Back
-              </button>
-            </div>
-          </div>
-          {renderContent()}
-        </div>
-      )}
-    </div>
+    <AppWrapper>
+      <Header />
+      {identity && activeSection && <Content refresh={refresh} />}
+    </AppWrapper>
   );
 }
+
+const AppWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  @media (max-width: 768px) {
+    padding: 0 ${styles.padding.md};
+  }
+`;
 
 export default App;

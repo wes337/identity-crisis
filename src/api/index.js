@@ -1,6 +1,5 @@
 import axios from "axios";
-
-const baseApiUrl = "https://identity-crisis-2000.herokuapp.com";
+import { baseApiUrl } from "../constants/api";
 
 export const getDatingProfile = async (identity = "") => {
   return axios
