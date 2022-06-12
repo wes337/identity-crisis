@@ -11,7 +11,7 @@ const ReadMore = ({ close }) => {
           <Button onClick={close}>Back</Button>
         </ReadMoreHeaderButtons>
       </ReadMoreHeader>
-      <ReadMoreBody className="generated-content">
+      <ReadMoreBody>
         <ReadMoreText>
           The hard work of your life is no longer work. You eat food from a
           frozen yogurt tube. It's green, it's got nutrients, it's based on
@@ -60,8 +60,6 @@ const ReadMoreHeader = styled.div`
   color: ${styles.colors.white};
   background-color: ${styles.colors.lightBlue};
   border: 4px double ${styles.colors.white};
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
   border-radius: 0;
   box-shadow: 0 0 0 4px ${styles.colors.lightBlue};
 

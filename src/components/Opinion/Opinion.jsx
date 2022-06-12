@@ -62,7 +62,7 @@ const OpinionWrapper = styled.div`
 
   label {
     font-size: ${styles.fontSize.sm};
-    color: purple;
+    color: ${styles.colors.purple};
   }
 `;
 
@@ -83,9 +83,6 @@ const OpinionInput = styled.div`
     font-size: ${styles.fontSize.md};
     line-height: ${styles.fontSize.md};
     text-align: center;
-    text-align: center;
-    -webkit-box-shadow: 10px 10px 0 ${styles.colors.black};
-    -moz-box-shadow: 10px 10px 0 ${styles.colors.black};
     box-shadow: 10px 10px 0 ${styles.colors.black};
     white-space: normal;
 
@@ -104,8 +101,6 @@ const OpinionInput = styled.div`
     }
 
     &:active {
-      -webkit-box-shadow: none;
-      -moz-box-shadow: none;
       box-shadow: none;
       transform: translate(4px, 4px);
     }

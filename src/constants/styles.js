@@ -10,6 +10,7 @@ const styles = {
     lightBlue: "#00aaaa",
     pink: "#fe54fe",
     red: "#aa0000",
+    purple: "#800080",
   },
   margin: {
     xs: "0.25rem",
