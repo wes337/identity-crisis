@@ -53,6 +53,7 @@ const ContentWrapper = styled.div`
   width: 100vw;
   min-height: 100vh;
   overflow: auto;
+  padding: 0 ${styles.padding.sm};
 
   @media only screen and (min-width: 1000px) {
     padding: 0 ${styles.padding.lg};
