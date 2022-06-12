@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/identity-crisis/static/css/main.6ebca4be.css",
-    "main.js": "/identity-crisis/static/js/main.d415c498.js",
+    "main.js": "/identity-crisis/static/js/main.cd0e0202.js",
     "index.html": "/identity-crisis/index.html",
     "main.6ebca4be.css.map": "/identity-crisis/static/css/main.6ebca4be.css.map",
-    "main.d415c498.js.map": "/identity-crisis/static/js/main.d415c498.js.map"
+    "main.cd0e0202.js.map": "/identity-crisis/static/js/main.cd0e0202.js.map"
   },
   "entrypoints": [
     "static/css/main.6ebca4be.css",
-    "static/js/main.d415c498.js"
+    "static/js/main.cd0e0202.js"
   ]
 }
