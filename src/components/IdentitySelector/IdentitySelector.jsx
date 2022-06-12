@@ -126,6 +126,7 @@ const IdentityButton = styled.button`
   font-size: ${styles.fontSize.sm};
   text-align: left;
   box-shadow: none;
+  padding: ${styles.padding.md} ${styles.padding.lg};
 
   &:before {
     content: ">> ";

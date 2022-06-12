@@ -22,11 +22,14 @@ function Button({ disabled, type, onClick, children }) {
 }
 
 const UnstyledButton = styled.button`
+  cursor: pointer;
   background: transparent;
+  border: 0;
   padding: 0;
   margin: 0;
   color: ${styles.colors.yellow};
   box-shadow: none;
+  font-size: ${styles.fontSize.md};
 
   &:before {
     content: "";

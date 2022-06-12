@@ -67,6 +67,9 @@ const QuestionInput = styled.div`
   textarea {
     resize: none;
     font-size: ${styles.fontSize.md};
+    background-color: ${styles.colors.gray};
+    border: 2px solid ${styles.colors.black};
+    margin-bottom: ${styles.margin.md};
   }
 
   input[type="submit"] {
