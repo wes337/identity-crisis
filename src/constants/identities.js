@@ -1,8 +1,8 @@
 const identities = {
-  sportsFanatic: "Sports fanatic",
-  evilWizard: "Evil wizard",
+  fascist: "Fascist",
+  poc: "POC",
   darkWebAficionado: "Dark web aficionado",
-  insaneGenius: "Insane genius",
+  leftist: "Leftist",
 };
 
 export default identities;
