@@ -74,7 +74,5 @@ export const getAvatar = async (identity = "", retry = true) => {
           return getAvatar(identity, false);
         }, 5000);
       }
-
-      return error;
     });
 };
