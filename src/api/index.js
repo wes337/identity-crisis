@@ -48,3 +48,33 @@ export const pingServer = async () => {
     .get(`${baseApiUrl}/ping`)
     .then((response) => response.status === 204);
 };
+
+export const getAvatar = async (identity = "", retry = true) => {
+  // This is a pretty hacky way to use this DALL-E mini API.
+  // If Hugging Face configures CORs correctly, this will stop working
+  return axios
+    .post(
+      "https://bf.dallemini.ai/generate",
+      {
+        prompt: `avatar for a ${identity}`,
+      },
+      {
+        credentials: "omit",
+        referrer: "https://hf.space/",
+        mode: "cors",
+      }
+    )
+    .then((response) => {
+      return response.data?.images;
+    })
+    .catch((error) => {
+      // Queue is full, try again in 5 seconds
+      if (error.code === "ERR_NETWORK" && retry) {
+        return setTimeout(() => {
+          return getAvatar(identity, false);
+        }, 5000);
+      }
+
+      return error;
+    });
+};

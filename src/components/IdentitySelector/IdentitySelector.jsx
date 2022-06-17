@@ -5,6 +5,7 @@ import identities from "../../constants/identities";
 import useIdentity from "../../hooks/useIdentity";
 import { removeStringPrefix } from "../../utils";
 import Button from "../Button";
+import Avatars from "../Avatars";
 
 function IdentitySelector() {
   const { identity, setIdentity } = useIdentity();
@@ -29,7 +30,10 @@ function IdentitySelector() {
       <IdentityChosen>
         <span>You chose...</span>
         <h2>{identity}</h2>
-        <Button onClick={() => resetIdentity()}>Change identity</Button>
+        <Avatars />
+        <ChangeIdentityButton>
+          <Button onClick={() => resetIdentity()}>Change identity</Button>
+        </ChangeIdentityButton>
       </IdentityChosen>
     );
   }
@@ -216,7 +220,9 @@ const IdentityChosen = styled.div`
     font-size: ${styles.fontSize.lg};
     margin-bottom: ${styles.margin.md};
   }
+`;
 
+const ChangeIdentityButton = styled.div`
   button {
     margin-bottom: ${styles.margin.md};
   }
