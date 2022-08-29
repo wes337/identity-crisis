@@ -49,6 +49,12 @@ export const pingServer = async () => {
     .then((response) => response.status === 204);
 };
 
+export const getSuggestion = async () => {
+  return axios
+    .get(`${baseApiUrl}/suggestion`)
+    .then((response) => response.data);
+};
+
 export const getAvatar = async (identity = "", retry = true) => {
   // This is a pretty hacky way to use this DALL-E mini API.
   // If Hugging Face configures CORs correctly, this will stop working

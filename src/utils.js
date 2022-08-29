@@ -12,7 +12,15 @@ export const isValidUrl = (urlString = "") => {
 };
 
 export const removeStringPrefix = (string = "") => {
-  // Remove 'a ', 'an ', and 'the '
+  // Remove 'i am ', 'a ', 'an ', and 'the '
+  if (string.toLowerCase().startsWith("i am ")) {
+    return string.slice(5);
+  }
+
+  if (string.toLowerCase().startsWith("i am a ")) {
+    return string.slice(7);
+  }
+
   if (string.toLowerCase().startsWith("a ")) {
     return string.slice(2);
   }
@@ -21,8 +29,16 @@ export const removeStringPrefix = (string = "") => {
     return string.slice(3);
   }
 
+  if (string.toLowerCase().startsWith("i am an ")) {
+    return string.slice(8);
+  }
+
   if (string.toLowerCase().startsWith("the ")) {
     return string.slice(4);
+  }
+
+  if (string.toLowerCase().startsWith("i am the ")) {
+    return string.slice(9);
   }
 
   return string;

@@ -1,23 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styled from "styled-components";
 import styles from "../../constants/styles";
-import identities from "../../constants/identities";
 import useIdentity from "../../hooks/useIdentity";
+import { getSuggestion } from "../../api";
 import { removeStringPrefix } from "../../utils";
 import Button from "../Button";
 import Avatars from "../Avatars";
+import Loader from "../Loader";
 
 function IdentitySelector() {
+  const [loading, setLoading] = useState(false);
   const { identity, setIdentity } = useIdentity();
-  const [selectedIdentity, setSelectedIdentity] = useState("");
   const [customIdentity, setCustomIdentity] = useState("");
 
-  const updateIdentity = () => {
-    const newIdentity =
-      selectedIdentity === "custom"
-        ? removeStringPrefix(customIdentity)
-        : selectedIdentity;
+  useEffect(() => {
+    setLoading(true);
+    getSuggestion().then((suggestion) => {
+      const newSuggestion = removeStringPrefix(suggestion).replace(".", "");
+      setCustomIdentity(newSuggestion);
+      setLoading(false);
+    });
+  }, []);
 
+  const updateIdentity = () => {
+    const newIdentity = removeStringPrefix(customIdentity);
     setIdentity(newIdentity);
   };
 
@@ -41,42 +47,18 @@ function IdentitySelector() {
   return (
     <IdentitySelectorWrapper>
       <IdentityList>
-        {Object.keys(identities).map((i) => {
-          const identity = identities[i];
-          return (
-            <IdentityListItem key={identity}>
-              <IdentityButton
-                key={identity}
-                onClick={() => setSelectedIdentity(identity)}
-                selected={selectedIdentity === identity}
-              >
-                {identity}
-              </IdentityButton>
-            </IdentityListItem>
-          );
-        })}
-        <IdentityListItem>
-          <IdentityButton
-            selected={selectedIdentity === "custom"}
-            onClick={() => setSelectedIdentity("custom")}
-          >
-            Custom
-          </IdentityButton>
-        </IdentityListItem>
-        {selectedIdentity === "custom" && (
+        {loading ? (
+          <Loader />
+        ) : (
           <CustomIdentityWarningWrapper>
-            <CustomIdentityWarning>
-              <h3>Danger!</h3>
-              <p>
-                You chose a custom identity. You are in danger of thinking for
-                yourself! Results may vary.
-              </p>
-            </CustomIdentityWarning>
+            <CustomIdentityLabel>
+              Type in your custom identity:
+            </CustomIdentityLabel>
             <CustomIdentityInput
               type="text"
               minLength="4"
               onChange={(event) => setCustomIdentity(event.target.value)}
-              placeholder="Type in your custom identity..."
+              value={customIdentity}
             />
           </CustomIdentityWarningWrapper>
         )}
@@ -85,11 +67,7 @@ function IdentitySelector() {
         <Button
           type="alt"
           onClick={updateIdentity}
-          disabled={
-            !selectedIdentity ||
-            (selectedIdentity === "custom" &&
-              customIdentity.trim().length === 0)
-          }
+          disabled={customIdentity.trim().length === 0}
         >
           Set Identity
         </Button>
@@ -112,45 +90,6 @@ const IdentityList = styled.ul`
   box-shadow: ${styles.boxShadow};
 `;
 
-const IdentityListItem = styled.li`
-  display: flex;
-`;
-
-const IdentityButton = styled.button`
-  color: ${({ selected }) =>
-    selected ? styles.colors.white : styles.colors.black};
-  background-color: ${({ selected }) =>
-    selected ? styles.colors.lightBlue : styles.colors.gray};
-  white-space: nowrap;
-  display: block;
-  margin: auto;
-  width: 100%;
-  cursor: pointer;
-  border: none;
-  font-size: ${styles.fontSize.sm};
-  text-align: left;
-  box-shadow: none;
-  padding: ${styles.padding.md} ${styles.padding.lg};
-
-  &:before {
-    content: ">> ";
-  }
-
-  &:after {
-    content: unset;
-  }
-
-  &:hover,
-  &:focus {
-    background-color: ${styles.colors.black};
-    color: ${styles.colors.gray};
-  }
-
-  &:active {
-    transform: none;
-  }
-`;
-
 const CustomIdentityWarningWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -158,30 +97,10 @@ const CustomIdentityWarningWrapper = styled.div`
   margin-top: ${styles.margin.sm};
 `;
 
-const CustomIdentityWarning = styled.div`
+const CustomIdentityLabel = styled.label`
   text-align: center;
-  color: ${styles.colors.white};
-  background-color: ${styles.colors.red};
-  padding: ${styles.padding.sm} 0;
-  border: 4px double ${styles.colors.gray};
-
-  h3 {
-    margin: ${styles.margin.xs} ${styles.margin.md};
-    text-transform: uppercase;
-
-    &:before {
-      content: ">> ";
-      color: ${styles.colors.yellow};
-    }
-    &:after {
-      content: " <<";
-      color: ${styles.colors.yellow};
-    }
-  }
-
-  p {
-    margin: ${styles.margin.xs} ${styles.margin.md};
-  }
+  color: ${styles.colors.black};
+  text-transform: uppercase;
 `;
 
 const CustomIdentityInput = styled.input`

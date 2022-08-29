@@ -17,8 +17,7 @@ const ReadMore = ({ close }) => {
           frozen yogurt tube. It's green, it's got nutrients, it's based on
           insects. But you dont mind because it's flavored with splenda,
           aspartame, and stevia. And it's actually good for you. Your job is
-          completely taken over by a computer. There are self-driving cars and
-          machines that masturbate for you.
+          completely taken over by a computer. There are self-driving cars.
         </ReadMoreText>
         <ReadMoreText>
           The last thing you need help with is your identity. Your personality.
