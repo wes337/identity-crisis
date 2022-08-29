@@ -7,6 +7,7 @@ The hard work of your life is no longer work. You eat food from a frozen yogurt 
 ## To do
 
 - Write actual documentation explaining each feature.
-- Clean up code. It's a huge mess since I wrote it all in a single day, and have no intentions for anyone else to actually look at this code. CSS especially.
+- ~~Clean up code. It's a huge mess since I wrote it all in a single day, and have no intentions for anyone else to actually look at this code. CSS especially.~~
 - Add a "Copy to clipboard" button
 - Add way to change GPT-3 models (maybe)
+- Add a "LinkedIn" headline generator
