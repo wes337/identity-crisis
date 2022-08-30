@@ -4,7 +4,7 @@ const useStore = create((set) => ({
   avatars: [],
   loading: false,
   error: false,
-  setAvatars: (value) => set(() => ({ avatars: value })),
+  setAvatars: (value) => set((state) => ({ ...state, avatars: value })),
   setLoading: (value) => set((state) => ({ ...state, loading: value })),
   setError: (value) => set((state) => ({ ...state, error: value })),
 }));

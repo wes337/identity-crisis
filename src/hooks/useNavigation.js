@@ -2,7 +2,8 @@ import create from "zustand";
 
 const useStore = create((set) => ({
   activeSection: "",
-  setActiveSection: (activeSection) => set(() => ({ activeSection })),
+  setActiveSection: (activeSection) =>
+    set((state) => ({ ...state, activeSection })),
 }));
 
 function useNavigation() {

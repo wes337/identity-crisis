@@ -2,7 +2,7 @@ import create from "zustand";
 
 const useStore = create((set) => ({
   identity: "",
-  setIdentity: (value) => set(() => ({ identity: value })),
+  setIdentity: (value) => set((state) => ({ ...state, identity: value })),
 }));
 
 function useIdentity() {
