@@ -26,6 +26,7 @@ const styles = {
     xl: "24px",
   },
   gap: {
+    xs: "0.25rem",
     sm: "0.75rem",
     md: "1rem",
   },

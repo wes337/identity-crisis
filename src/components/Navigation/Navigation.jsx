@@ -10,18 +10,25 @@ import useAvatars from "../../hooks/useAvatars";
 
 const Navigation = () => {
   const { identity } = useIdentity();
-  const { setAvatars, setLoading } = useAvatars();
+  const { avatars, setAvatars, loading, setLoading, error, setError } =
+    useAvatars();
   const { setActiveSection } = useNavigation();
 
   useEffect(() => {
-    if (!identity) {
+    if (!identity || loading || error || avatars?.length > 0) {
       return;
     }
 
+    setLoading(true);
     getAvatar(identity).then((avatars) => {
-      setAvatars(avatars);
+      if (avatars.type === "error") {
+        setError(true);
+      } else {
+        setAvatars(avatars);
+      }
+      setLoading(false);
     });
-  }, [identity, setAvatars, setLoading]);
+  }, [avatars, error, identity, loading, setAvatars, setError, setLoading]);
 
   if (!identity) {
     return null;

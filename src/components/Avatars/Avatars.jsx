@@ -2,7 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 import styles from "../../constants/styles";
 import useAvatars from "../../hooks/useAvatars";
-import Button from "../Button";
 
 function Avatars() {
   const { avatars } = useAvatars();
@@ -10,59 +9,76 @@ function Avatars() {
 
   const showAvatars = avatars?.length > 0;
 
-  const selectPreviousAvatar = () => {
-    setSelectedAvatar((currentSelectedAvatar) => {
-      const previousAvatar = currentSelectedAvatar - 1;
-      if (previousAvatar === -1) {
-        return avatars.length - 1;
-      }
-      return previousAvatar;
-    });
-  };
-
-  const selectNextAvatar = () => {
-    setSelectedAvatar((currentSelectedAvatar) => {
-      const nextAvatar = currentSelectedAvatar + 1;
-      if (nextAvatar > avatars.length - 1) {
-        return 0;
-      }
-      return nextAvatar;
-    });
-  };
-
   if (!showAvatars) {
     return null;
   }
 
   return (
     <AvatarWrapper>
-      <Button type="link" onClick={selectPreviousAvatar}>
-        &lt;&lt;
-      </Button>
-      <Avatar
-        src={`data:image/png;base64, ${avatars[selectedAvatar]}`}
-        alt=""
-      />
-      <Button type="link" onClick={selectNextAvatar}>
-        &gt;&gt;
-      </Button>
+      {avatars.map((avatar, index) => {
+        const isSelected = index === selectedAvatar;
+
+        return (
+          <Avatar
+            key={avatar.id}
+            isSelected={isSelected}
+            onClick={() => setSelectedAvatar(index)}
+          >
+            <img src={avatar.generation.image_path} alt="" />
+          </Avatar>
+        );
+      })}
     </AvatarWrapper>
   );
 }
 
 const AvatarWrapper = styled.div`
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   align-items: center;
   justify-content: center;
   margin: ${styles.margin.sm};
   gap: ${styles.gap.sm};
 `;
 
-const Avatar = styled.img`
-  height: 64px;
-  width: 64px;
-  object-fit: contain;
-  border: 4px double ${styles.colors.white};
+const Avatar = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: ${styles.gap.xs};
+  background: none;
+  border: none;
+  cursor: pointer;
+
+  img {
+    height: 48px;
+    width: 48px;
+    object-fit: contain;
+    border: 4px double ${styles.colors.white};
+    filter: grayscale(0.75);
+
+    ${({ isSelected }) =>
+      isSelected &&
+      `
+        height: 64px;
+        width: 64px;
+        filter: none;
+      `}
+  }
+
+  ${({ isSelected }) =>
+    isSelected &&
+    `
+      color: ${styles.colors.yellow};
+      
+      &:before {
+        content: '>>';
+      }
+
+      &:after {
+        content: '<<'
+      }
+  `}
 `;
 
 export default Avatars;

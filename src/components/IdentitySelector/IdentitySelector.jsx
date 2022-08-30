@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import styled from "styled-components";
 import styles from "../../constants/styles";
 import useIdentity from "../../hooks/useIdentity";
+import useAvatars from "../../hooks/useAvatars";
 import { getSuggestion } from "../../api";
 import { removeStringPrefix } from "../../utils";
 import Button from "../Button";
@@ -11,6 +12,7 @@ import Loader from "../Loader";
 function IdentitySelector() {
   const [loading, setLoading] = useState(false);
   const { identity, setIdentity } = useIdentity();
+  const { setAvatars } = useAvatars();
   const [customIdentity, setCustomIdentity] = useState("");
 
   useEffect(() => {
@@ -29,6 +31,7 @@ function IdentitySelector() {
 
   const resetIdentity = () => {
     setIdentity("");
+    setAvatars([]);
   };
 
   if (identity) {
