@@ -5,7 +5,7 @@ import useAvatars from "../../hooks/useAvatars";
 
 function Avatars() {
   const { avatars } = useAvatars();
-  const [selectedAvatar, setSelectedAvatar] = useState(0);
+  const [selectedAvatar, setSelectedAvatar] = useState(1);
 
   const showAvatars = avatars?.length > 0;
 
