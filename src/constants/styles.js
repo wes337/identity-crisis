@@ -16,6 +16,7 @@ const styles = {
     xs: "0.25rem",
     sm: "0.75rem",
     md: "1rem",
+    lg: "1.5rem",
     xl: "2rem",
   },
   padding: {
@@ -24,6 +25,7 @@ const styles = {
     md: "14px",
     lg: "16px",
     xl: "24px",
+    xxl: "48px",
   },
   gap: {
     xs: "0.25rem",

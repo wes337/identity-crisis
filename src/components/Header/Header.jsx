@@ -16,9 +16,9 @@ function Header() {
 
   return (
     <HeaderWrapper show={show}>
-      <Title>Identity Crisis 2000™</Title>
+      <Title>Identity Crisis 98™</Title>
       <Subtitle>
-        Input your <span>identity</span>, then generate some content.
+        Choose your <span>identity</span>, then generate some content.
         <br />
         <em>
           What is this app? Click{" "}
