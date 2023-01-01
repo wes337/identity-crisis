@@ -1,1 +1,2 @@
-export const baseApiUrl = "https://identity-crisis-2000.herokuapp.com";
+export const baseApiUrl =
+  "https://identity-crisis-server-production.up.railway.app";
