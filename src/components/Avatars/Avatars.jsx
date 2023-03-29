@@ -16,6 +16,10 @@ function Avatars() {
   return (
     <AvatarWrapper>
       {avatars.map((avatar, index) => {
+        if (!avatar) {
+          return null;
+        }
+
         const isSelected = index === selectedAvatar;
 
         return (

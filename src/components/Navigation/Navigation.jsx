@@ -21,6 +21,9 @@ const Navigation = () => {
 
     setLoading(true);
     getAvatar(identity).then((avatars) => {
+      if (!avatars) {
+        return;
+      }
       if (avatars.type === "error") {
         setError(true);
       } else {
